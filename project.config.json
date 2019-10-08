@@ -1,0 +1,183 @@
+{
+	"miniprogramRoot": "miniprogram/",
+	"cloudfunctionRoot": "cloudfunctions/",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"enhance": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"nodeModules": true,
+		"autoAudits": false,
+		"uglifyFileName": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"appid": "wxd8d42c2a601315d6",
+	"projectname": "just4love",
+	"libVersion": "2.8.3",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"miniprogram": {
+			"current": 18,
+			"list": [
+				{
+					"id": -1,
+					"name": "db guide",
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pages/profile/profile",
+					"pathName": "pages/profile/profile",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/edit",
+					"pathName": "pages/user/edit",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "pages/recommend/recommend",
+					"pathName": "pages/recommend/recommend",
+					"query": "",
+					"scene": 1017
+				},
+				{
+					"id": -1,
+					"name": "pages/user/requirement",
+					"pathName": "pages/user/requirement",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/search/search",
+					"pathName": "pages/search/search",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "pages/user/photo",
+					"pathName": "pages/user/photo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/info",
+					"pathName": "pages/user/info",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "pages/suggest/suggest",
+					"pathName": "pages/suggest/suggest",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/report/report",
+					"pathName": "pages/report/report",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/login/login",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/favorite",
+					"pathName": "pages/user/favorite",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/admin/users",
+					"pathName": "pages/admin/users",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/handbook",
+					"pathName": "pages/user/handbook",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/admin/admin",
+					"pathName": "pages/admin/admin",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/admin/invitationcode",
+					"pathName": "pages/admin/invitationcode",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/register",
+					"pathName": "pages/user/register",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/sponsor/sponsor",
+					"pathName": "pages/sponsor/sponsor",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/admin/sponsor",
+					"pathName": "pages/admin/sponsor",
+					"scene": null
+				}
+			]
+		}
+	}
+}

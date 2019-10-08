@@ -1,0 +1,9 @@
+<!--Pages/suggest/suggest.wxml-->
+<van-field
+    value="{{ message }}"
+    label="建议"
+    type="textarea"
+    placeholder="请输入建议"
+    autosize="true"
+    bind:change="onChange" />
+<van-button color="#a4579d" block="true" bindtap="onSubmit">提交</van-button>

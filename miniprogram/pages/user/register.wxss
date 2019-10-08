@@ -1,0 +1,32 @@
+/* pages/user/register.wxss */
+
+page {
+  height: 100%;
+}
+
+image {
+  width: 200rpx;
+  height: 200rpx;
+  margin: 10rpx;
+}
+
+.register {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
+.rooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex: 0;
+}
+
+.next {
+  margin: 40rpx;
+}

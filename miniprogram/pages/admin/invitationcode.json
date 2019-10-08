@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-toast": "vant-weapp/toast/index",
+    "van-cell-group": "vant-weapp/cell-group/index",
+    "van-checkbox-group": "vant-weapp/checkbox-group/index",
+    "van-field": "vant-weapp/field/index",
+    "van-button": "vant-weapp/button/index",
+    "van-checkbox": "vant-weapp/checkbox/index"
+  },
+  "navigationBarTitleText": "生成邀请码"
+}

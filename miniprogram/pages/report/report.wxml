@@ -1,0 +1,16 @@
+<!--Pages/report/report.wxml-->
+<van-field
+    value="{{ username }}"
+    label="姓名"
+    placeholder="请输入姓名"
+    bind:change="onUsernameChange"/>
+
+<van-field
+    value="{{ message }}"
+    label="举报内容"
+    type="textarea"
+    placeholder="请输入举报内容"
+    autosize="true"
+    bind:change="onMsgChange"/>
+
+<van-button color="#a4579d" block="true" bindtap="onSubmit">举报</van-button>

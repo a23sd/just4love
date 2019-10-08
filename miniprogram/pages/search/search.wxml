@@ -1,0 +1,38 @@
+<!--pages/search/search.wxml-->
+<van-toast id="van-toast" />
+
+<van-popup show="{{ show }}" position="top" bind:close="onFilter">
+  <van-tree-select items="{{ items }}" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" bind:click-nav="onClickNav" bind:click-item="onClickItem" />
+</van-popup>
+
+
+<van-field left-icon="search" right-icon="apps-o" placeholder="请输入搜索关键词" clearable focus value="{{keyword}}" bind:confirm="onSearch" bind:click-icon="onClick" color="#a4579d" />
+
+<view class="prompt">{{prompt}}</view>
+
+<van-card tag="{{result['被心仪']}}" wx:if="{{!recoresultmmend['屏蔽']}}" wx:for="{{results}}" wx:for-item="result" wx:key="{{index}}" thumb="{{ result['缩略图'] }}" thumb-link="../user/info?openid={{result._openid}}">
+  <view slot="title">
+    <van-row>
+      <van-col span="12">{{result['姓名']}}
+        <van-icon name="{{sexIcon[result['性别']]}}" size="medium" color="#a4579d" /></van-col>
+      <van-col offset="4" span="6">
+        <van-icon wx:if="{{result['心仪']}}" name="like" size="medium" color="#a4579d" data-index="{{index}}" bindtap="onUnFavorite" />
+        <van-icon wx:else="{{!result['心仪']}}" name="like-o" size="medium" color="#a4579d" data-index="{{index}}" bindtap="onFavorite" />
+        <van-icon wx:if="{{!result['屏蔽']}}" name="pause-circle-o" size="medium" color="#a4579d" data-index="{{index}}" bindtap="onIgore" />
+      </van-col>
+    </van-row>
+  </view>
+
+  <view slot="tags" class="tags">
+    <view>
+      <van-tag plain color="#a4579d">{{result['学历']}}</van-tag>
+      <van-tag plain color="#a4579d">{{result['职业']}}</van-tag>
+      <van-tag plain color="#a4579d">{{result['生日']}}</van-tag>
+    </view>
+    <view>
+      <van-tag plain color="#a4579d">{{result['身高']}}</van-tag>
+      <van-tag plain color="#a4579d">{{result['体重']}}</van-tag>
+      <van-tag plain color="#a4579d">{{result['工作地']}}</van-tag>
+    </view>
+  </view>
+</van-card>

@@ -1,0 +1,13 @@
+/* pages/search/search.wxss */
+van-icon {
+  margin-left: 5px;
+}
+.tags view  {
+  margin: 2px;
+} 
+.prompt {
+  font-size: 12px;
+  line-height: 12px;
+  color: #666;
+  padding: 5px 16px;
+}

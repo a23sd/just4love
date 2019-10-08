@@ -1,0 +1,10 @@
+<!--pages/user/requirement.wxml-->
+<van-toast id="van-toast" />
+
+<van-popup show="{{show}}" position="bottom">
+  <van-picker show-toolbar="true" columns="{{ columns }}" bind:confirm="onConfirm" bind:cancel="onCancel" />
+</van-popup>
+
+<van-cell wx:for="{{titles}}" wx:key="{{index}}" title="{{item}}" value="{{values[item]}}" data-item="{{item}}" bind:click="onClick"/>
+
+<van-button color="#a4579d"  block="true" bindtap="onSubmit">保存</van-button>

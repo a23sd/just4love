@@ -1,0 +1,6 @@
+/* pages/photo/add.wxss */
+image {
+  width: 200rpx;
+  height: 200rpx;
+  margin: 10rpx;
+}

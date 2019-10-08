@@ -1,0 +1,3 @@
+<!--pages/user/handbook.wxml-->
+<!-- <web-view src="{{link}}"></web-view> -->
+<image src="{{url}}" style="width: 100%;" mode="widthFix"></image>

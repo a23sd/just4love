@@ -1,0 +1,5 @@
+<!--pages/admin/sponsor.wxml-->
+<van-toast id="van-toast" />
+<van-field value="{{ name }}" label="赞助商" type="textarea" placeholder="请输入赞助商" autosize="true" bind:change="onNameChange" />
+<van-field value="{{ content }}" label="赞助内容" type="textarea" placeholder="请输入赞助内容" autosize="true" bind:change="onContentChange" />
+<van-button color="#a4579d" disabled="{{disabled}}" block="true" bindtap="onSubmit">提交</van-button>

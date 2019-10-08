@@ -1,0 +1,4 @@
+/* pages/admin/invitationcode.wxss */
+.van-checkbox {
+  padding: 10rpx 10rpx 10rpx 10rpx;
+}

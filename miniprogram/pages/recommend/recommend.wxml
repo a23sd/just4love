@@ -1,0 +1,57 @@
+<!--pages/recommend/recommend.wxml-->
+<van-notice-bar left-icon="bullhorn-o" text="{{msg}}" />
+<van-toast id="van-toast" />
+<van-card tag="{{vip['被心仪']}}" wx:if="{{vip}}" thumb="{{ vip['缩略图'] }}" thumb-link="../user/info?openid={{vip._openid}}">
+  <view slot="title">
+    <van-row>
+      <van-col span="12">{{vip['姓名']}}
+        <van-icon name="{{sexIcon[vip['性别']]}}" size="medium" color="#a4579d" /></van-col>
+      <van-col offset="4" span="6">
+        <van-icon wx:if="{{vip['心仪']}}" name="like" size="medium" color="#a4579d" data-index="-100" bindtap="onUnFavorite" />
+        <van-icon wx:else="{{!vip['心仪']}}" name="like-o" size="medium" color="#a4579d" data-index="-100" bindtap="onFavorite" />
+        <van-icon wx:if="{{!vip['屏蔽']}}" name="pause-circle-o" size="medium" color="#a4579d" data-index="-100" bindtap="onIgore" />
+      </van-col>
+    </van-row>
+
+  </view>
+  <view slot="tags">
+    <view>
+      <van-tag plain color="#a4579d">{{vip['性别']}}</van-tag>
+      <van-tag plain color="#a4579d">{{vip['学历']}}</van-tag>
+      <van-tag plain color="#a4579d">{{vip['职业']}}</van-tag>
+      <van-tag plain color="#a4579d">{{vip['生日']}}</van-tag>
+    </view>
+    <view>
+      <van-tag plain color="#a4579d">{{vip['身高']}}</van-tag>
+      <van-tag plain color="#a4579d">{{vip['体重']}}</van-tag>
+      <van-tag plain color="#a4579d">{{vip['工作地']}}</van-tag>
+    </view>
+  </view>
+</van-card>
+
+<van-card tag="{{recommend['被心仪']}}" wx:if="{{!recommend['屏蔽']}}"   wx:for="{{recommends}}" wx:for-item="recommend" wx:key="{{index}}" thumb="{{ recommend['缩略图'] }}" thumb-link="../user/info?openid={{recommend._openid}}">
+  <view slot="title">
+    <van-row>
+      <van-col span="12">{{recommend['姓名']}}
+        <van-icon name="{{sexIcon[recommend['性别']]}}" size="medium" color="#a4579d" /></van-col>
+      <van-col offset="4" span="6">
+        <van-icon wx:if="{{recommend['心仪']}}" name="like" size="medium" color="#a4579d" data-index="{{index}}" bindtap="onUnFavorite" />
+        <van-icon wx:else="{{!recommend['心仪']}}" name="like-o" size="medium" color="#a4579d" data-index="{{index}}" bindtap="onFavorite" />
+        <van-icon wx:if="{{!recommend['屏蔽']}}" name="pause-circle-o" size="medium" color="#a4579d" data-index="{{index}}" bindtap="onIgore" />
+      </van-col>
+    </van-row>
+  </view>
+  <view slot="tags">
+    <view>
+      <van-tag plain color="#a4579d">{{recommend['性别']}}</van-tag>
+      <van-tag plain color="#a4579d">{{recommend['学历']}}</van-tag>
+      <van-tag plain color="#a4579d">{{recommend['职业']}}</van-tag>
+      <van-tag plain color="#a4579d">{{recommend['生日']}}</van-tag>
+    </view>
+    <view>
+      <van-tag plain color="#a4579d">{{recommend['身高']}}</van-tag>
+      <van-tag plain color="#a4579d">{{recommend['体重']}}</van-tag>
+      <van-tag plain color="#a4579d">{{recommend['工作地']}}</van-tag>
+    </view>
+  </view>
+</van-card>

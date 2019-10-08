@@ -1,0 +1,14 @@
+{
+  "usingComponents": {
+    "van-toast": "vant-weapp/toast/index",
+    "van-cell": "vant-weapp/cell/index",
+    "van-cell-group": "vant-weapp/cell-group/index",
+    "van-picker": "vant-weapp/picker/index",
+    "van-popup": "vant-weapp/popup/index",
+    "van-button": "vant-weapp/button/index",
+    "van-area": "vant-weapp/area/index",
+    "van-datetime-picker": "vant-weapp/datetime-picker/index",
+    "van-field": "vant-weapp/field/index"
+  },
+  "navigationBarTitleText": "希望你"
+}

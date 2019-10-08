@@ -1,0 +1,16 @@
+<!--pages/admin/invitationcode.wxml-->
+<van-toast id="van-toast" />
+<van-cell-group title="生成邀请码">
+  <van-field value="{{ num }}" center clearable type="number" label="数量" placeholder="请输入邀请码数量" use-button-slot  bind:change="onNumChange" >
+    <van-button slot="button" disabled="{{disabled}}" size="small" color="#a4579d" bindtap="onGenCodes">生成邀请码</van-button>
+  </van-field>
+</van-cell-group>
+
+<van-cell-group title="未使用邀请码">
+  <van-button color="#a4579d" disabled="{{disabled}}" size="small" block="true" bindtap='onShare'>分享激活码</van-button>
+  <van-checkbox-group value="{{ result }}" bind:change="onChange">
+      <van-checkbox checked-color="#a4579d" wx:for="{{ list }}" wx:key="index" name="{{ item['code'] }}">
+        {{ item['code'] }}
+      </van-checkbox>
+  </van-checkbox-group>
+</van-cell-group>

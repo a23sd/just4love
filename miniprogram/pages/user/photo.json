@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-toast": "vant-weapp/toast/index",
+    "van-row": "vant-weapp/row/index",
+    "van-col": "vant-weapp/col/index",
+    "van-icon": "vant-weapp/icon/index",
+    "van-button": "vant-weapp/button/index",
+    "van-dialog": "vant-weapp/dialog/index"
+  },
+  "navigationBarTitleText": "照片"
+}

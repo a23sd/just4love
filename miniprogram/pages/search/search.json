@@ -1,0 +1,17 @@
+{
+  "usingComponents": {
+    "van-icon": "vant-weapp/icon/index",
+    "van-button": "vant-weapp/button/index",
+    "van-cell": "vant-weapp/cell/index",
+    "van-tag": "vant-weapp/tag/index",
+    "van-card": "vant-weapp/card/index",
+    "van-popup": "vant-weapp/popup/index",
+    "van-field": "vant-weapp/field/index",
+    "van-tree-select": "vant-weapp/tree-select/index",
+    "van-action-sheet": "vant-weapp/action-sheet/index",
+    "van-picker": "vant-weapp/picker/index",
+    "van-row": "vant-weapp/row/index",
+    "van-col": "vant-weapp/col/index"
+  },
+  "navigationBarTitleText": "搜索"
+}

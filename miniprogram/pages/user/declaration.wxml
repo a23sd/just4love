@@ -1,0 +1,10 @@
+<!--pages/user/declaration.wxml-->
+<van-toast id="van-toast" />
+<van-field
+    value="{{ values['爱情宣言'] }}"
+    label="爱情宣言"
+    type="textarea"
+    placeholder="请输入爱情宣言"
+    autosize="true"
+    bind:change="onChange" />
+<van-button color="#a4579d" disabled="{{disabled}}" block="true" bindtap="onSubmit">提交</van-button>

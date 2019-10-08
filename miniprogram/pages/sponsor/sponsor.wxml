@@ -1,0 +1,8 @@
+<!--pages/sponsor/sponsor.wxml-->
+<van-cell-group title="赞助请联系">
+  <van-cell title="青羽" value="微信：QQ675868553"/>
+</van-cell-group>
+
+<van-cell-group title="赞助商列表">
+  <van-cell wx:for="{{sponsors}}" wx:for-item="sponsor" wx:key="{{index}}" title="{{sponsor['赞助商']}}" value="{{sponsor['赞助内容']}}"/>
+</van-cell-group>

@@ -1,0 +1,77 @@
+{
+  "usingComponents": {
+    "van-toast": "vant-weapp/toast/index",
+    "van-button": "vant-weapp/button/index",
+    "van-cell": "vant-weapp/cell/index",
+    "van-cell-group": "vant-weapp/cell-group/index",
+    "van-picker": "vant-weapp/picker/index",
+    "van-popup": "vant-weapp/popup/index",
+    "van-area": "vant-weapp/area/index",
+    "van-datetime-picker": "vant-weapp/datetime-picker/index",
+    "van-tab": "vant-weapp/tab/index",
+    "van-tabs": "vant-weapp/tabs/index",
+    "van-steps": "vant-weapp/steps/index",
+    "van-field": "vant-weapp/field/index",
+    "van-dialog": "vant-weapp/dialog/index",
+    "van-row": "vant-weapp/row/index",
+    "van-col": "vant-weapp/col/index",
+    "van-icon": "vant-weapp/icon/index",
+    "van-card": "vant-weapp/card/index",
+    "van-switch-cell": "vant-weapp/switch-cell/index"
+  },
+  "pages": [
+    "pages/recommend/recommend",
+    "pages/search/search",
+    "pages/profile/profile",
+    "pages/user/edit",
+    "pages/user/declaration",
+    "pages/user/info",
+    "pages/user/photo",
+    "pages/user/requirement",
+    "pages/user/favorite",
+    "pages/user/ignore",
+    "pages/user/handbook",
+    "pages/user/register",
+    "pages/report/report",
+    "pages/suggest/suggest",
+    "pages/sponsor/sponsor",
+    "pages/admin/admin",
+    "pages/admin/users",
+    "pages/admin/invitationcode",
+    "pages/admin/notice",
+    "pages/admin/sponsor"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#a4579d",
+    "navigationBarTitleText": "遇见本硕博",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#a4579d",
+    "list": [
+      {
+        "pagePath": "pages/recommend/recommend",
+        "text": "推荐",
+        "iconPath": "images/recommend.png",
+        "selectedIconPath": "images/recommend-actived.png"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "搜索",
+        "iconPath": "images/search.png",
+        "selectedIconPath": "images/search-actived.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我",
+        "iconPath": "images/profile.png",
+        "selectedIconPath": "images/profile-actived.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,66 @@
+<!--pages/user/register.wxml-->
+<van-toast id="van-toast" />
+
+<van-popup show="{{showNormal}}" position="bottom">
+  <van-picker show-toolbar="true" columns="{{ columns }}" bind:confirm="onUserConfirm" bind:cancel="onUserCancel" />
+</van-popup>
+
+<van-popup show="{{showDate}}" position="bottom">
+  <van-datetime-picker type="date" value="{{ currentDate }}" min-date="{{ minDate }}" min-max="{{ maxDate }}" formatter="{{ formatter }}" bind:confirm="onUserConfirm" bind:cancel="onUserCancel" />
+</van-popup>
+
+<van-popup show="{{showArea}}" position="bottom">
+  <van-area value="510100" area-list="{{ areaList }}" bind:confirm="onUserConfirm" bind:cancel="onUserCancel" />
+</van-popup>
+
+<van-popup show="{{showRequire}}" position="bottom">
+  <van-picker show-toolbar="true" columns="{{ columns }}" bind:confirm="onRequireConfirm" bind:cancel="onRequireCancel" />
+</van-popup>
+
+<van-dialog use-slot title="删除图片" show="{{ show }}" show-cancel-button bind:close="onClose" bind:confirm="onConfirmDel">
+  <image src="{{delImg}}" />
+</van-dialog>
+
+<van-steps steps="{{ steps }}" active="{{ active }}" active-icon="success" active-color="#a4579d" />
+<view class="register">
+  <view class="content">
+    <!-- 激活码 -->
+    <van-field wx:if="{{steps[active].text === '激活码'}}" label="邀请码" placeholder="请输入邀请码" value="{{code}}" bind:change="onCodeChange" />
+
+    <!-- 基本信息 -->
+    <van-cell-group wx:if="{{steps[active].text === '基本信息'}}" title="基本信息">
+      <van-field left-icon="edit" label="姓名" placeholder="请输入姓名" value="{{userValues['姓名']}}" bind:change="onUserNameChange" />
+      <van-field left-icon="phone-o" label="微信" placeholder="请输入微信号" value="{{userValues['微信']}}" bind:change="onWxChange" />
+      <van-cell icon="birthday-cake-o" title="生日" value="{{birthday}}" data-item="生日" bind:click="onUserClick" />
+      <van-cell icon="{{heightIcon}}" title="身高" value="{{height}}" data-item="身高" bind:click="onUserClick" />
+      <van-cell icon="{{weightIcon}}" title="体重" value="{{weight}}" data-item="体重" bind:click="onUserClick" />
+      <van-cell wx:for="{{userItems}}" wx:key="{{index}}" icon="{{item}}" title="{{index}}" value="{{userValues[index]}}" data-item="{{index}}" bind:click="onUserClick" />
+    </van-cell-group>
+
+    <!-- 爱情宣言 -->
+    <van-field wx:if="{{steps[active].text === '爱情宣言'}}" value="{{ userValues['爱情宣言'] }}" label="爱情宣言" type="textarea" placeholder="请输入爱情宣言" autosize="true" bind:change="onChange" />
+
+    <!-- 我的相册 -->
+    <view wx:if="{{steps[active].text === '我的相册'}}">
+      <van-row>
+        <van-col span="8">
+          <van-icon size="200rpx" name="plus" color="#ddd" bindtap="uploadImg" />
+        </van-col>
+        <van-col span="8" wx:for="{{thumbs}}" wx:key="{{index}}">
+          <image src="{{item}}" data-index='{{index}}' bindtouchstart="onTouchStart" bindtouchend="onTouchEnd" bindtap="previewImg" bindlongpress="deleteImg" />
+        </van-col>
+      </van-row>
+    </view>
+
+    <!-- 希望你 -->
+    <van-cell-group wx:if="{{steps[active].text === '希望你'}}" title="希望你">
+      <van-cell wx:for="{{titles}}" wx:key="{{index}}" title="{{item}}" value="{{requireValues[item]}}" data-item="{{item}}" bind:click="onRequireClick" />
+    </van-cell-group>
+
+  </view>
+  <view class="rooter">
+    <van-button custom-class="next" size="small" color="#a4579d" bind:click="prevStep">上一步</van-button>
+    <van-button wx:if="{{steps.length <= active+1}}" custom-class="next" size="small" color="#a4579d" disabled="{{disabled}}" bind:click="nextStep">完成</van-button>
+    <van-button wx:if="{{steps.length-1 > active}}" custom-class="next" size="small" color="#a4579d" disabled="{{disabled}}" bind:click="nextStep">下一步</van-button>
+  </view>
+</view>

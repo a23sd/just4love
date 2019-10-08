@@ -1,0 +1,26 @@
+<!--pages/user/edit.wxml-->
+<van-toast id="van-toast" />
+
+<van-popup show="{{showNormal}}" position="bottom">
+  <van-picker show-toolbar="true" columns="{{ columns }}" bind:confirm="onConfirm" bind:cancel="onCancel" />
+</van-popup>
+
+<van-popup show="{{showDate}}" position="bottom">
+  <van-datetime-picker type="date" value="{{ currentDate }}" min-date="{{ minDate }}" min-max="{{ maxDate }}" formatter="{{ formatter }}" bind:confirm="onConfirm" bind:cancel="onCancel" />
+</van-popup>
+
+<van-popup show="{{showArea}}" position="bottom">
+  <van-area value="510100" area-list="{{ areaList }}" bind:confirm="onConfirm" bind:cancel="onCancel" />
+</van-popup>
+
+<van-cell-group title="基本信息">
+  <van-field left-icon="edit" label="姓名" placeholder="请输入姓名" value="{{values['姓名']}}" bind:change="onUserNameChange" />
+  <van-field left-icon="phone-o" label="微信" placeholder="请输入微信号" value="{{values['微信']}}" bind:change="onWxChange" />
+  <van-cell icon="birthday-cake-o" title="生日" value="{{birthday}}" data-item="生日" bind:click="onClick" />
+  <van-cell icon="{{heightIcon}}" title="身高" value="{{height}}" data-item="身高" bind:click="onClick" />
+  <van-cell icon="{{weightIcon}}" title="体重" value="{{weight}}" data-item="体重" bind:click="onClick" />
+
+  <van-cell wx:for="{{userInfo}}" wx:key="{{index}}" icon="{{item}}" title="{{index}}" value="{{values[index]}}" data-item="{{index}}" bind:click="onClick" />
+</van-cell-group>
+
+<van-button color="#a4579d" disabled="{{disabled}}" block="true" bindtap="onSubmit">保存</van-button>

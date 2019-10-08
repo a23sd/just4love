@@ -1,0 +1,16 @@
+/* pages/user/info.wxss */
+
+view {
+  margin: 5px;
+  font-size: 14px;
+}
+
+text {
+  color: #a4579d;
+}
+
+image {
+  width: 200rpx;
+  height: 200rpx;
+  margin: 10rpx;
+}

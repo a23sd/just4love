@@ -1,0 +1,30 @@
+<!--pages/user/info.wxml-->
+<van-toast id="van-toast" />
+<van-panel title="相册">
+  <view>
+    <van-row>
+      <van-col span="7" wx:for="{{thumbs}}" wx:key="{{index}}">
+        <image src="{{item}}" data-index='{{index}}' bindtap="previewImg" />
+      </van-col>
+    </van-row>
+  </view>
+</van-panel>
+
+<van-panel title="爱情宣言" wx:if="{{declaration !== ''}}">
+  <text>
+    {{declaration}}
+  </text>
+</van-panel>
+
+<van-button color="#a4579d" size="small" disabled="{{disabled}}" block="true" bindtap="onClick">查看微信</van-button>
+<van-panel title="个人资料" status="{{status}}">
+  <view>
+    <van-tag plain size="medium" color="#a4579d" wx:for="{{infoTitle}}" wx:key="{{index}}" wx:if="{{info[item] !== '请选择'&& info[item] !== undefinded}}">{{info[item]}}</van-tag>
+  </view>
+</van-panel>
+
+<van-panel title="希望你">
+  <view>
+    <van-tag plain size="medium" color="#a4579d" wx:for="{{requirementTitle}}" wx:key="{{index}}" wx:if="{{requirement[item] !== '不限' && requirement[item] !== undefinded}}">{{requirement[item]}}</van-tag>
+  </view>
+</van-panel>

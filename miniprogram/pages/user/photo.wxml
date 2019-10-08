@@ -1,0 +1,21 @@
+<!--pages/photo/add.wxml-->
+<van-toast id="van-toast" />
+<van-dialog
+  use-slot
+  title="删除图片"
+  show="{{ show }}"
+  show-cancel-button
+  bind:close="onClose" bind:confirm="onConfirm">
+  <image src="{{delImg}}" />
+</van-dialog>
+<view>
+  <van-row>
+    <van-col span="8">
+      <van-icon size="200rpx" name="plus" color="#ddd" bindtap="uploadImg"/>
+    </van-col>
+    <van-col span="8" wx:for="{{thumbs}}" wx:key="{{index}}">
+      <image src="{{item}}" data-index='{{index}}' bindtouchstart="onTouchStart" bindtouchend="onTouchEnd" bindtap="previewImg" bindlongpress="deleteImg" 
+/>
+    </van-col>
+  </van-row>
+</view>

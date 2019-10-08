@@ -1,0 +1,10 @@
+<!--pages/admin/notice.wxml-->
+<van-toast id="van-toast" />
+<van-field
+    value="{{ notice }}"
+    label="公告"
+    type="textarea"
+    placeholder="请输入公告"
+    autosize="true"
+    bind:change="onChange" />
+<van-button color="#a4579d" disabled="{{disabled}}" block="true" bindtap="onSubmit">提交</van-button>

@@ -1,0 +1,7 @@
+/* pages/recommend/recommend.wxss */
+van-icon {
+  margin-left: 5px;
+}
+view {
+  margin: 2px;
+}

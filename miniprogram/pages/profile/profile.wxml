@@ -1,0 +1,51 @@
+<!--pages/profile/profile.wxml-->
+<van-toast id="van-toast" />
+<van-card>
+  <view slot="title">
+    <open-data type="userNickName" lang="zh_CN"></open-data>
+  </view>
+  <view slot="thumb">
+    <open-data type="userAvatarUrl"></open-data>
+  </view>
+  <view slot="desc">
+    <view>性别：
+      <open-data type="userGender" lang="zh_CN"></open-data>
+    </view>
+    <view>所在国家：
+      <open-data type="userCountry" lang="zh_CN"></open-data>
+    </view>
+    <view>所在省份：
+      <open-data type="userProvince" lang="zh_CN"></open-data>
+    </view>
+    <view>所在城市：
+      <open-data type="userCity" lang="zh_CN"></open-data>
+    </view>
+  </view>
+</van-card>
+<van-cell-group title="个人信息">
+  <van-cell icon="notes-o" is-link title="基本信息" link-type="navigateTo" url="/pages/user/edit" />
+  <van-cell icon="photo-o" is-link title="我的相册" link-type="navigateTo" url="/pages/user/photo" />
+  <van-cell icon="like-o" is-link title="爱情宣言" link-type="navigateTo" url="/pages/user/declaration" />
+  <van-switch-cell icon="eye-o" title="公开信息" checked="{{ values['show'] }}" bind:change="onChange" />
+</van-cell-group>
+
+<van-cell-group title="相亲名片">
+  <van-cell icon="notes-o" is-link title="相亲名片" link-type="navigateTo" url="/pages/user/info?openid={{openid}}" />
+</van-cell-group>
+
+<van-cell-group title="择偶信息">
+  <van-cell icon="flower-o" is-link title="希望你" link-type="navigateTo" url="/pages/user/requirement" />
+  <van-cell icon="star-o" is-link title="我的心仪" link-type="navigateTo" url="/pages/user/favorite" />
+  <van-cell icon="pause-circle-o" is-link title="我的屏蔽" link-type="navigateTo" url="/pages/user/ignore" />
+</van-cell-group>
+
+<van-cell-group title="其他">
+  <!-- <van-cell icon="notes-o" is-link title="用户手册" link-type="navigateTo" url="/pages/user/handbook" /> -->
+  <van-cell icon="warning-o" is-link title="举报" link-type="navigateTo" url="/pages/report/report" />
+  <van-cell icon="records" is-link title="建议" link-type="navigateTo" url="/pages/suggest/suggest" />
+  <van-cell icon="records" is-link title="赞助" link-type="navigateTo" url="/pages/sponsor/sponsor" />
+</van-cell-group>
+
+<van-cell-group wx:if="{{values['admin']}}" title="admin">
+  <van-cell icon="manager-o" is-link title="管理" link-type="navigateTo" url="/pages/admin/admin" />
+</van-cell-group>
