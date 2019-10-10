@@ -1,3 +1,4 @@
+var log = require('../utils/log.js')
 const db = wx.cloud.database() // 初始化数据库
 const _ = db.command
 const eduList = ['专科', '本科', '硕士', '博士']
@@ -39,23 +40,30 @@ const values = {
 function getOpenid() {
   return new Promise(function(resolve, reject) {
     console.log("===============get openid==============")
+    log.info("===============get openid==============")
     const openid = wx.getStorageSync('openid')
     if (openid === '' || openid === undefined) {
       wx.cloud.callFunction({
         name: 'login',
       }).then(res => {
         console.log("===============get openid success==============")
+        log.info("===============get openid success==============")
         wx.setStorageSync('openid', res.result.openid); //存储openid 
         console.log(res.result.openid)
+        log.info(res.result.openid)
         resolve(res.result.openid)
       }).catch(err => {
         console.log("===============get openid failed==============")
+        log.info("===============get openid failed==============")
         console.error(err)
+        log.error(err)
         reject('请求失败')
       })
     } else {
       console.log("===============get history openid==============")
+      log.info("===============get history failed==============")
       console.log(openid)
+      log.info(openid)
       resolve(openid)
     }
   })
@@ -64,6 +72,7 @@ function getOpenid() {
 function getUser(update) {
   return new Promise((resolve, reject) => {
     console.log("===============get user==============")
+    log.info("===============get user==============")
     const user = wx.getStorageSync('user')
     if (user === '' || user === undefined || update === true) {
       const openid = wx.getStorageSync('openid')
@@ -72,26 +81,33 @@ function getUser(update) {
       }).get().then(res => {
         if (res.data.length >= 1) {
           console.log("===============get user success==============")
+          log.info("===============get user success==============")
           var userInfo = res.data[0]
           if (userInfo.enable === false) {
             reject('refuse to use')
           } else {
             wx.setStorageSync('user', userInfo)
             console.log(userInfo)
+            log.info(userInfo)
             resolve(userInfo)
           }
         } else {
           console.log("===============user not exist==============")
+          log.info("===============user not exist==============")
           reject('no user')
         }
       }).catch(err => {
         console.log("===============get user failed==============")
         console.error(err)
+        log.info("===============get user failed==============")
+        log.error(err)
         reject(err)
       })
     } else {
       console.log("===============get history user==============")
+      log.info("===============get history user==============")
       console.log(user)
+      log.info(user)
       resolve(user)
     }
   })
@@ -100,11 +116,13 @@ function getUser(update) {
 function getUserByOpenid(openid) {
   return new Promise((resolve, reject) => {
     console.log("===============get user==============")
+    log.info("===============get user==============")
     db.collection('user').where({
       _openid: openid,
     }).get().then(res => {
       if (res.data.length >= 1) {
         console.log("===============get user success==============")
+        log.info("===============get user success==============")
         var userInfo = res.data[0]
         if (userInfo.enable === false) {
           reject('refuse to use')
@@ -115,15 +133,20 @@ function getUserByOpenid(openid) {
           }
           userInfo.身高 = userInfo.身高 + 'cm'
           userInfo.体重 = userInfo.体重 + 'kg'
+          console.log(userInfo)
+          log.info(userInfo)
           resolve(userInfo)
         }
       } else {
         console.log("===============user not exist==============")
+        log.info("===============user not exist==============")
         reject('no user')
       }
     }).catch(err => {
       console.log("===============get user failed==============")
       console.error(err)
+      log.info("===============get user failed==============")
+      log.error(err)
       reject(err)
     })
   })
@@ -132,15 +155,21 @@ function getUserByOpenid(openid) {
 function updateUser(values) {
   return new Promise((resolve, reject) => {
     console.log("===============update user==============")
+    log.info("===============update user==============")
     const openid = wx.getStorageSync('openid')
     db.collection('user').doc(openid).set({
       data: values
     }).then(res => {
       console.log("===============update user success==============")
+      console.log(res)
+      log.info("===============update user success==============")
+      log.info(res)
       resolve(res)
     }).catch(err => {
       console.log("===============update user failed==============")
       console.error(err)
+      log.info("===============update user failed==============")
+      log.error(err)
       reject(err)
     })
   })
@@ -157,11 +186,15 @@ function updateUserStatus(id, values) {
       }
     }).then(res => {
       console.log("===============update user status success==============")
-      resolve(res)
       console.log(res)
+      log.info("===============update user status success==============")
+      log.info(res)
+      resolve(res)
     }).catch(err => {
       console.log("===============update user status failed==============")
       console.error(err)
+      log.info("===============update user status failed==============")
+      log.error(err)
       reject(err)
     })
   })
@@ -181,6 +214,8 @@ function getVip() {
     condition['enable'] = true
     console.log('===========get vip===========')
     console.log(condition)
+    log.info('===========get vip===========')
+    log.info(condition)
     db.collection('user')
       .where(condition)
       .field({
@@ -210,7 +245,6 @@ function getVip() {
           obj.生日 = [obj.生日.getFullYear(), obj.生日.getMonth() + 1, obj.生日.getDate()].join('-')
           obj.身高 = obj.身高 + 'cm'
           obj.体重 = obj.体重 + 'kg'
-          console.log(obj.心仪)
           if (obj.心仪.indexOf(user._openid) > -1) {
             obj.被心仪 = '心仪你'
           } else {
@@ -232,10 +266,15 @@ function getVip() {
           return obj.屏蔽 == false
         })
         console.log("===============get vip success==============")
+        console.log(data)
+        log.info("===============get vip success==============")
+        log.info(data)
         resolve(data)
       }).catch(err => {
         console.log("===============get vip failed==============")
         console.error(err)
+        log.info("===============get vip failed==============")
+        log.error(err)
         reject(err)
       })
   })
@@ -254,13 +293,12 @@ function getRecommend(skip, size, fields, order) {
     condition['show'] = true
     condition['enable'] = true
     console.log(requireInfo)
+    log.info(requireInfo)
     for (var key in requireInfo) {
       if (key === '_id' || key === '_openid' || requireInfo[key] === '不限') {
         continue;
       } else if (key === '年龄') {
         var age = requireInfo[key]
-        console.log("=======================")
-        console.log(age)
         if (age.indexOf("年及以上") > -1) {
           age = age.substring(0, age.indexOf("年及以上") - 1)
           var fromDate = new Date(parseInt(age), 0, 1)
@@ -360,8 +398,8 @@ function getRecommend(skip, size, fields, order) {
     }
     console.log('===========get recommend===========')
     console.log(condition)
-    console.log(fields)
-    console.log(order)
+    log.info('===========get recommend===========')
+    log.info(condition)
     db.collection('user')
       .orderBy(fields[0], order)
       .orderBy(fields[1], order)
@@ -414,10 +452,15 @@ function getRecommend(skip, size, fields, order) {
           return obj;
         });
         console.log("===============get recommend success==============")
+        console.log(res.data)
+        log.info("===============get recommend success==============")
+        log.info(res.data)
         resolve(res.data)
       }).catch(err => {
         console.log("===============get recommend failed==============")
         console.error(err)
+        log.info("===============get recommend failed==============")
+        log.error(err)
         reject(err)
       })
   })
@@ -482,6 +525,8 @@ function searchUser(keyword, skip, size, fields, order) {
     ])
     console.log('===========search user===========')
     console.log(condition)
+    log.info('===========search user===========')
+    log.info(condition)
     db.collection('user')
       .orderBy(fields[0], order)
       .orderBy(fields[1], order)
@@ -534,10 +579,14 @@ function searchUser(keyword, skip, size, fields, order) {
         });
         console.log("===============search success==============")
         console.log(res.data)
+        log.info("===============search success==============")
+        log.info(res.data)
         resolve(res.data)
       }).catch(err => {
         console.log("===============search failed==============")
         console.error(err)
+        log.info("===============search failed==============")
+        log.error(err)
         reject(err)
       })
   })
@@ -614,6 +663,8 @@ function filterUser(selectItem, skip, size, fields, order) {
     condition['enable'] = true
     console.log('===========filter user===========')
     console.log(condition)
+    log.info('===========filter user===========')
+    log.info(condition)
     db.collection('user')
       .orderBy(fields[0], order)
       .orderBy(fields[1], order)
@@ -666,10 +717,14 @@ function filterUser(selectItem, skip, size, fields, order) {
         });
         console.log("===============filter success==============")
         console.log(res.data)
+        log.info("===============filter success==============")
+        log.info(res.data)
         resolve(res.data)
       }).catch(err => {
         console.log("===============filter failed==============")
         console.error(err)
+        log.info("===============filter failed==============")
+        log.error(err)
         reject(err)
       })
   })
@@ -677,13 +732,15 @@ function filterUser(selectItem, skip, size, fields, order) {
 
 function getFavorite(skip, size) {
   return new Promise((resolve, reject) => {
-    console.log('===========get favorite===========')
     const user = wx.getStorageSync('user')
     var condition = {}
     condition['show'] = true
     condition['enable'] = true
     condition['_openid'] = _.in(user.心仪)
+    console.log('===========get favorite===========')
     console.log(condition)
+    log.info('===========get favorite===========')
+    log.info(condition)
     db.collection('user')
       .where(condition)
       .skip(skip)
@@ -733,9 +790,12 @@ function getFavorite(skip, size) {
           return obj;
         })
         console.log("===============get favorite success==============")
+        console.log(res.data)
+        log.info("===============get favorite success==============")
+        log.info(res.data)
         resolve(res.data)
       }).catch(err => {
-        console.log("===============update favorite failed==============")
+        console.log("===============get favorite failed==============")
         console.error(err)
         reject(err)
       })
@@ -744,13 +804,16 @@ function getFavorite(skip, size) {
 
 function getIgnore(skip, size) {
   return new Promise((resolve, reject) => {
-    console.log('===========get ignore===========')
+    
     const user = wx.getStorageSync('user')
     var condition = {}
     condition['show'] = true
     condition['enable'] = true
     condition['_openid'] = _.in(user.屏蔽)
+    console.log('===========get ignore===========')
     console.log(condition)
+    log.info('===========get ignore===========')
+    log.info(condition)
     db.collection('user')
       .where(condition)
       .skip(skip)
@@ -800,10 +863,15 @@ function getIgnore(skip, size) {
           return obj;
         })
         console.log("===============get ignore success==============")
+        console.log(res.data)
+        log.info("===============get ignore success==============")
+        log.info(res.data)
         resolve(res.data)
       }).catch(err => {
-        console.log("===============update ignore failed==============")
+        console.log("===============get ignore failed==============")
         console.error(err)
+        log.info("===============get ignore failed==============")
+        log.error(err)
         reject(err)
       })
   })
@@ -846,10 +914,15 @@ function getUsers(skip, size) {
           return obj;
         })
         console.log("===============get users success==============")
+        console.log(res.data)
+        log.info("===============get users success==============")
+        log.info(res.data)
         resolve(res.data)
       }).catch(err => {
         console.log("===============get users failed==============")
         console.error(err)
+        log.info("===============get users failed==============")
+        log.error(err)
         reject(err)
       })
   })
@@ -896,6 +969,8 @@ function searchUserByAdmin(keyword, skip, size) {
     ])
     console.log('===========search user by admin===========')
     console.log(condition)
+    log.info('===========search user by admin===========')
+    log.info(condition)
     db.collection('user')
       .where(condition)
       .skip(skip)
@@ -930,10 +1005,14 @@ function searchUserByAdmin(keyword, skip, size) {
         });
         console.log("===============search by admin success==============")
         console.log(res.data)
+        log.info("===============search by admin success==============")
+        log.info(res.data)
         resolve(res.data)
       }).catch(err => {
         console.log("===============search by admin failed==============")
         console.error(err)
+        log.info("===============search by admin failed==============")
+        log.error(err)
         reject(err)
       })
   })
@@ -941,6 +1020,7 @@ function searchUserByAdmin(keyword, skip, size) {
 
 function getLikeMe(skip, size) {
   console.log('===========get like me===========')
+  log.info("===============get like me==============")
   const openid = wx.getStorageSync('openid')
   const user = wx.getStorageSync('user')
   return new Promise((resolve, reject) => {
@@ -998,14 +1078,17 @@ function getLikeMe(skip, size) {
           return obj;
         })
         console.log("===============get like me success==============")
+        log.info("===============get like me success==============")
+        log.info(res.data)
         resolve(res.data)
       }).catch(err => {
         console.log("===============get like me failed==============")
         console.error(err)
+        log.info("===============get like me failed==============")
+        log.error(err)
         reject(err)
       })
   })
-
 }
 
 module.exports = {
