@@ -10,7 +10,7 @@
 		"newFeature": true,
 		"coverView": true,
 		"nodeModules": true,
-		"autoAudits": false,
+		"autoAudits": true,
 		"uglifyFileName": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
@@ -44,7 +44,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 18,
+			"current": 19,
 			"list": [
 				{
 					"id": -1,
@@ -175,6 +175,13 @@
 					"id": -1,
 					"name": "pages/admin/sponsor",
 					"pathName": "pages/admin/sponsor",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/user/likeme",
+					"pathName": "pages/user/likeme",
 					"scene": null
 				}
 			]

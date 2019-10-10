@@ -36,6 +36,7 @@
 <van-cell-group title="择偶信息">
   <van-cell icon="flower-o" is-link title="希望你" link-type="navigateTo" url="/pages/user/requirement" />
   <van-cell icon="star-o" is-link title="我的心仪" link-type="navigateTo" url="/pages/user/favorite" />
+  <van-cell icon="like-o" is-link title="心仪我的" link-type="navigateTo" url="/pages/user/likeme" />
   <van-cell icon="pause-circle-o" is-link title="我的屏蔽" link-type="navigateTo" url="/pages/user/ignore" />
 </van-cell-group>
 

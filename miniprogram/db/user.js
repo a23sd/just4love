@@ -589,7 +589,7 @@ function filterUser(selectItem, skip, size, fields, order) {
         }
       } else if (obj.text == '何时结婚') {
         condition[obj.text] = _.in(marryList.slice(0, marryList.indexOf(obj.values[0]) + 1))
-      }else if (obj.text == '是否吸烟') {
+      } else if (obj.text == '是否吸烟') {
         condition[obj.text] = _.in(smokingList.slice(0, smokingList.indexOf(obj.values[0]) + 1))
       } else if (obj.text == '是否喝酒') {
         condition[obj.text] = _.in(drinkList.slice(0, drinkList.indexOf(obj.values[0]) + 1))
@@ -675,7 +675,7 @@ function filterUser(selectItem, skip, size, fields, order) {
   })
 }
 
-function getFavorite() {
+function getFavorite(skip, size) {
   return new Promise((resolve, reject) => {
     console.log('===========get favorite===========')
     const user = wx.getStorageSync('user')
@@ -686,6 +686,8 @@ function getFavorite() {
     console.log(condition)
     db.collection('user')
       .where(condition)
+      .skip(skip)
+      .limit(size)
       .field({
         _openid: true,
         姓名: true,
@@ -740,7 +742,7 @@ function getFavorite() {
   })
 }
 
-function getIgnore() {
+function getIgnore(skip, size) {
   return new Promise((resolve, reject) => {
     console.log('===========get ignore===========')
     const user = wx.getStorageSync('user')
@@ -751,6 +753,8 @@ function getIgnore() {
     console.log(condition)
     db.collection('user')
       .where(condition)
+      .skip(skip)
+      .limit(size)
       .field({
         _openid: true,
         姓名: true,
@@ -856,8 +860,7 @@ function searchUserByAdmin(keyword, skip, size) {
     if (keyword === '') {
       reject('no keyword')
     }
-    var condition = _.or([
-      {
+    var condition = _.or([{
         姓名: db.RegExp({
           regexp: `.*${keyword}.*`,
           options: 'i',
@@ -936,6 +939,75 @@ function searchUserByAdmin(keyword, skip, size) {
   })
 }
 
+function getLikeMe(skip, size) {
+  console.log('===========get like me===========')
+  const openid = wx.getStorageSync('openid')
+  const user = wx.getStorageSync('user')
+  return new Promise((resolve, reject) => {
+    db.collection('user')
+      .where({
+        心仪: openid
+      })
+      .skip(skip)
+      .limit(size)
+      .field({
+        _openid: true,
+        姓名: true,
+        性别: true,
+        生日: true,
+        学历: true,
+        身高: true,
+        体重: true,
+        职业: true,
+        工作地: true,
+        照片: true,
+        缩略图: true,
+        心仪: true,
+        "enable": true,
+        "vip": true,
+      })
+      .get().then(res => {
+        console.log(res)
+        res.data.map(function(obj) {
+          if (obj.照片.length == 0 || obj.缩略图.length == 0) {
+            obj.照片 = "/images/notfound.jpg"
+            obj.缩略图 = "/images/notfound.jpg"
+          } else {
+            obj.照片 = obj.照片[0]
+            obj.缩略图 = obj.缩略图[0]
+          }
+          obj.生日 = new Date(obj.生日)
+          obj.生日 = [obj.生日.getFullYear(), obj.生日.getMonth() + 1, obj.生日.getDate()].join('-')
+          obj.身高 = obj.身高 + 'cm'
+          obj.体重 = obj.体重 + 'kg'
+          if (obj.心仪.indexOf(user._openid) > -1) {
+            obj.被心仪 = '心仪你'
+          } else {
+            obj.被心仪 = ''
+          }
+          if (user.心仪.indexOf(obj._openid) > -1) {
+            obj.心仪 = true
+          } else {
+            obj.心仪 = false
+          }
+          if (user.屏蔽.indexOf(obj._openid) > -1) {
+            obj.屏蔽 = true
+          } else {
+            obj.屏蔽 = false
+          }
+          return obj;
+        })
+        console.log("===============get like me success==============")
+        resolve(res.data)
+      }).catch(err => {
+        console.log("===============get like me failed==============")
+        console.error(err)
+        reject(err)
+      })
+  })
+
+}
+
 module.exports = {
   getOpenid: getOpenid,
   getUser: getUser,
@@ -949,5 +1021,6 @@ module.exports = {
   getFavorite: getFavorite,
   getIgnore: getIgnore,
   getUsers: getUsers,
-  searchUserByAdmin: searchUserByAdmin
+  searchUserByAdmin: searchUserByAdmin,
+  getLikeMe: getLikeMe
 }

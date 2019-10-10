@@ -9,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    pageSize: 10,
     ignores:[],
     values: {
       "姓名": "",
@@ -48,7 +49,7 @@ Page({
       })
       await user.getOpenid()
       const userInfo = await user.getUser(true)
-      const ignores = await user.getIgnore()
+      const ignores = await user.getIgnore(this.data.ignores.length, this.data.pageSize)
       delete userInfo._id
       delete userInfo._openid
       this.setData({

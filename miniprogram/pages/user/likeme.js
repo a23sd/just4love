@@ -1,8 +1,7 @@
-// pages/user/favorite.js
+// pages/user/likeme.js
 import Toast from '/vant-weapp/toast/toast'
 const regeneratorRuntime = require('../../lib/regenerator-runtime/runtime')
 const user = require('../../db/user.js')
-
 Page({
 
   /**
@@ -10,7 +9,7 @@ Page({
    */
   data: {
     pageSize: 10,
-    favorites: [],
+    users: [],
     values: {
       "姓名": "",
       "微信": "",
@@ -41,7 +40,7 @@ Page({
     }
   },
 
-  async getFavorites() {
+  async getLikeMe() {
     try {
       wx.showLoading({
         title: '加载中...',
@@ -49,18 +48,18 @@ Page({
       })
       await user.getOpenid()
       const userInfo = await user.getUser(true)
-      const favorites = await user.getFavorite(this.data.favorites.length, this.data.pageSize)
+      const users = await user.getLikeMe(this.data.users.length, this.data.pageSize)
       delete userInfo._id
       delete userInfo._openid
       this.setData({
         values: userInfo,
-        favorites: favorites
+        users: users
       })
       wx.hideLoading()
     } catch (err) {
       console.log(err)
       wx.hideLoading()
-      Toast.fail('获取我的心仪失败，请刷新重试')
+      Toast.fail('获取心仪我的嘉宾失败，请刷新重试')
     }
   },
 
@@ -84,12 +83,12 @@ Page({
 
   onFavorite: function (event) {
     const index = event.currentTarget.dataset.index
-    if (this.data.values.心仪.indexOf(this.data.favorites[index]._openid) > -1) {
+    if (this.data.values.心仪.indexOf(this.data.users[index]._openid) > -1) {
       Toast('已经在心仪列表中，无需重复添加')
     } else {
       this.setData({
-        ["values.心仪"]: this.data.values.心仪.concat(this.data.favorites[index]._openid),
-        [`favorites\[${index}\].心仪`]: true
+        ["values.心仪"]: this.data.values.心仪.concat(this.data.users[index]._openid),
+        [`users\[${index}\].心仪`]: true
       });
       this.updateUser()
     }
@@ -97,12 +96,12 @@ Page({
 
   onUnFavorite: function (event) {
     const index = event.currentTarget.dataset.index
-    if (this.data.values.心仪.indexOf(this.data.favorites[index]._openid) < 0) {
+    if (this.data.values.心仪.indexOf(this.data.users[index]._openid) < 0) {
       Toast('不在心仪列表中，移除失败')
     } else {
-      this.data.values.心仪.splice(this.data.values.心仪.indexOf(this.data.favorites[index]._openid), 1)
+      this.data.values.心仪.splice(this.data.values.心仪.indexOf(this.data.users[index]._openid), 1)
       this.setData({
-        [`favorites\[${index}\].心仪`]: false
+        [`users\[${index}\].心仪`]: false
       });
       this.updateUser()
     }
@@ -110,12 +109,12 @@ Page({
 
   onIgore: function (event) {
     const index = event.currentTarget.dataset.index
-    if (this.data.values.屏蔽.indexOf(this.data.favorites[index]._openid) > -1) {
+    if (this.data.values.屏蔽.indexOf(this.data.users[index]._openid) > -1) {
       Toast('已经在屏蔽列表中，无需重复添加')
     } else {
       this.setData({
-        ["values.屏蔽"]: this.data.values.屏蔽.concat(this.data.favorites[index]._openid),
-        [`favorites\[${index}\].屏蔽`]: true
+        ["values.屏蔽"]: this.data.values.屏蔽.concat(this.data.users[index]._openid),
+        [`users\[${index}\].屏蔽`]: true
       });
       this.updateUser()
     }
@@ -123,22 +122,23 @@ Page({
 
   onUnIgore: function (event) {
     const index = event.currentTarget.dataset.index
-    if (this.data.values.屏蔽.indexOf(this.data.favorites[index]._openid) < 0) {
+    if (this.data.values.屏蔽.indexOf(this.data.users[index]._openid) < 0) {
       Toast('不在屏蔽列表中，移除失败')
     } else {
-      this.data.values.屏蔽.splice(this.data.values.屏蔽.indexOf(this.data.favorites[index]._openid), 1)
+      this.data.values.屏蔽.splice(this.data.values.屏蔽.indexOf(this.data.users[index]._openid), 1)
       this.setData({
-        [`favorites\[${index}\].屏蔽`]: false
+        [`users\[${index}\].屏蔽`]: false
       });
       this.updateUser()
     }
   },
+  
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+
   },
 
   /**
@@ -153,9 +153,9 @@ Page({
    */
   onShow: function () {
     this.setData({
-      favorites: []
+      users: []
     })
-    this.getFavorites()
+    this.getLikeMe()
   },
 
   /**
@@ -177,9 +177,9 @@ Page({
    */
   onPullDownRefresh: function () {
     this.setData({
-      favorites: []
+      users: []
     })
-    this.getFavorites()
+    this.getLikeMe()
   },
 
   /**

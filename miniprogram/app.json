@@ -30,6 +30,7 @@
     "pages/user/requirement",
     "pages/user/favorite",
     "pages/user/ignore",
+    "pages/user/likeme",
     "pages/user/handbook",
     "pages/user/register",
     "pages/report/report",

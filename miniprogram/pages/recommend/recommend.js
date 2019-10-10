@@ -63,7 +63,6 @@ Page({
     try {
       await user.getOpenid()
       await user.getUser(true)
-      return true
     } catch (err) {
       console.log(err)
       if (err === 'refuse to use') {
@@ -74,7 +73,7 @@ Page({
         })
       }
       else {
-        Toast.fail('检查用户权限失败，请刷新重试')
+        Toast.fail('获取用户信息，请刷新重试')
       }
     }
   },

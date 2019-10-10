@@ -64,6 +64,8 @@ const requireData = {
 
 }
 
+const eduList = ['专科', '本科', '硕士', '博士']
+
 Page({
 
   /**
