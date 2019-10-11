@@ -49,6 +49,7 @@ Page({
       "是否打牌": "请选择",
       "照片": [],
       "缩略图": [],
+      "照片数量": 0,
       "爱情宣言": "",
       "心仪": [],
       "屏蔽": [],
@@ -62,17 +63,22 @@ Page({
   async checkUser() {
     try {
       await user.getOpenid()
-      await user.getUser(true)
+      await user.checkUser()
     } catch (err) {
       console.log(err)
       if (err === 'refuse to use') {
         Toast.fail('已列入黑名单，如有疑问请联系管理员')
       } else if (err === 'no user') {
+        Toast('请填写个人基本信息')
         wx.navigateTo({
           url: '/pages/user/register'
         })
-      }
-      else {
+      } else if (err === 'Incomplete user information') {
+        Toast('请完善个人基本信息')
+        wx.navigateTo({
+          url: '/pages/user/edit'
+        })
+      } else {
         Toast.fail('获取用户信息，请刷新重试')
       }
     }
@@ -162,7 +168,7 @@ Page({
 
 
   getIndex: function() {
-    if (this.data.vip == undefined){
+    if (this.data.vip == undefined) {
       return -1
     }
     for (var index in this.data.recommends) {
@@ -258,8 +264,7 @@ Page({
         if (this.data.vips.length > 0) {
           var vipIdx = Math.floor(Math.random() * this.data.vips.length)
           var vip = this.data.vips[vipIdx]
-        }
-        else {
+        } else {
           var vipIdx = 0
           var vip = ''
         }
@@ -289,8 +294,7 @@ Page({
           if (this.data.vips.length > 0) {
             var vipIdx = Math.floor(Math.random() * this.data.vips.length)
             var vip = this.data.vips[vipIdx]
-          }
-          else {
+          } else {
             var vipIdx = 0
             var vip = ''
           }

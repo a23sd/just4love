@@ -1,3 +1,4 @@
+var log = require('../utils/log.js')
 const util = require('../utils/util.js')
 const db = wx.cloud.database() // 初始化数据库
 const _ = db.command
@@ -71,7 +72,7 @@ function createInvitaitonCode(num) {
   return new Promise((resolve, reject) => {
     for (var i = 0; i < num; i++) {
       const values = {
-        "code": util.uuid(),
+        "code": util.uuid().substring(0, 8),
         "expire": util.getExpire(),
         "userid": ''
       }

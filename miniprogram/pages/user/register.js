@@ -75,9 +75,9 @@ Page({
     active: 0,
     code: '',
     steps: [
-      {
-        text: '激活码'
-      },
+      // {
+      //   text: '激活码'
+      // },
       {
         text: '基本信息'
       },
@@ -148,6 +148,7 @@ Page({
       "是否打牌": "请选择",
       "照片": [],
       "缩略图": [],
+      "照片数量": 0,
       "爱情宣言": "",
       "心仪": [],
       "屏蔽": [],
@@ -203,7 +204,7 @@ Page({
         disabled: false
       })
     } else if (this.data.steps[this.data.active].text === '基本信息') {
-      if (this.data.userValues.姓名 === '' || this.data.userValues.微信 === '' || this.data.userValues.性别 == '请选择' || this.data.userValues.生日 == '学历' ||
+      if (this.data.userValues.姓名.trim().length === 0 || this.data.userValues.微信.trim().length === 0 || this.data.userValues.性别 == '请选择' || this.data.userValues.生日 == '请选择' ||
         this.data.userValues.身高 == '请选择' || this.data.userValues.体重 == '请选择' || this.data.userValues.婚姻情况 == '请选择' || this.data.userValues.工作地 == '请选择' || this.data.userValues.职业 == '请选择' || this.data.userValues.收入 == '请选择' || this.data.userValues.房车情况 == '请选择' || this.data.userValues.何时结婚 == '请选择' || this.data.userValues.是否吸烟 == '请选择' || this.data.userValues.是否喝酒 == '请选择' || this.data.userValues.是否打牌 == '请选择') {
         Toast('为了更好的为您服务请完整填写相关信息')
       } else {
@@ -408,7 +409,7 @@ Page({
               encoding: 'base64', //编码格式
               success: res => { //成功的回调
                 wx.cloud.callFunction({
-                  name: 'tinypng',
+                  name: 'uploadImage',
                   data: {
                     fileName: fileName,
                     file: res.data
@@ -439,7 +440,8 @@ Page({
         Promise.all(promiseArr).then(res => {
           that.setData({
             ["userValues.照片"]: that.data.images,
-            ["userValues.缩略图"]: that.data.thumbs
+            ["userValues.缩略图"]: that.data.thumbs,
+            ["values.照片数量"]: that.data.images.length
           })
           this.updateUser()
         }).catch(err => {

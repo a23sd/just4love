@@ -82,6 +82,7 @@ Page({
       "是否打牌": "请选择",
       "照片": [],
       "缩略图": [],
+      "照片数量": 0,
       "爱情宣言": "",
       "心仪": [],
       "屏蔽": [],
@@ -208,7 +209,7 @@ Page({
   },
 
   onSubmit: function() {
-    if (this.data.values.姓名 === '' || this.data.values.微信 === '' || this.data.values.性别 == '请选择' || this.data.values.生日 == '学历' ||
+    if (this.data.values.姓名.trim().length === 0 || this.data.values.微信.trim().length === 0 || this.data.values.性别 == '请选择' || this.data.values.生日 == '请选择' ||
       this.data.values.身高 == '请选择' || this.data.values.体重 == '请选择' || this.data.values.婚姻情况 == '请选择' || this.data.values.工作地 == '请选择' || this.data.values.职业 == '请选择' || this.data.values.收入 == '请选择' || this.data.values.房车情况 == '请选择' || this.data.values.何时结婚 == '请选择' || this.data.values.是否吸烟 == '请选择' || this.data.values.是否喝酒 == '请选择' || this.data.values.是否打牌 == '请选择') {
       Toast('为了更好的为您服务请完整填写相关信息')
     } else {

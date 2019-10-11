@@ -28,6 +28,7 @@ const values = {
   "是否打牌": "请选择",
   "照片": [],
   "缩略图": [],
+  "照片数量": 0,
   "爱情宣言": "",
   "心仪": [],
   "屏蔽": [],
@@ -61,11 +62,51 @@ function getOpenid() {
       })
     } else {
       console.log("===============get history openid==============")
-      log.info("===============get history failed==============")
+      log.info("===============get history openid==============")
       console.log(openid)
       log.info(openid)
       resolve(openid)
     }
+  })
+}
+
+function checkUser() {
+  return new Promise((resolve, reject) => {
+    console.log("===============check user==============")
+    log.info("===============check user==============")
+    const user = wx.getStorageSync('user')
+    const openid = wx.getStorageSync('openid')
+    db.collection('user').where({
+      _openid: openid,
+    }).get().then(res => {
+      if (res.data.length >= 1) {
+        console.log("===============check user success==============")
+        log.info("===============check user success==============")
+        var userInfo = res.data[0]
+        if (userInfo.enable === false) {
+          reject('refuse to use')
+        } else {
+          wx.setStorageSync('user', userInfo)
+          console.log(userInfo)
+          log.info(userInfo)
+          if (userInfo.姓名.trim().length === 0 || userInfo.微信.trim().length === 0 || userInfo.性别 == '请选择' || userInfo.生日 == '请选择' ||
+            userInfo.身高 == '请选择' || userInfo.体重 == '请选择' || userInfo.婚姻情况 == '请选择' || userInfo.工作地 == '请选择' || userInfo.职业 == '请选择' || userInfo.收入 == '请选择' || userInfo.房车情况 == '请选择' || userInfo.何时结婚 == '请选择' || userInfo.是否吸烟 == '请选择' || userInfo.是否喝酒 == '请选择' || userInfo.是否打牌 == '请选择') {
+            reject('Incomplete user information')
+          }
+          resolve(userInfo)
+        }
+      } else {
+        console.log("===============user not exist==============")
+        log.info("===============user not exist==============")
+        reject('no user')
+      }
+    }).catch(err => {
+      console.log("===============check user failed==============")
+      console.error(err)
+      log.info("===============check user failed==============")
+      log.error(err)
+      reject(err)
+    })
   })
 }
 
@@ -401,6 +442,7 @@ function getRecommend(skip, size, fields, order) {
     log.info('===========get recommend===========')
     log.info(condition)
     db.collection('user')
+      .orderBy('照片数量', 'desc')
       .orderBy(fields[0], order)
       .orderBy(fields[1], order)
       .orderBy(fields[2], order)
@@ -528,6 +570,7 @@ function searchUser(keyword, skip, size, fields, order) {
     log.info('===========search user===========')
     log.info(condition)
     db.collection('user')
+      .orderBy('照片数量', 'desc')
       .orderBy(fields[0], order)
       .orderBy(fields[1], order)
       .orderBy(fields[2], order)
@@ -666,6 +709,7 @@ function filterUser(selectItem, skip, size, fields, order) {
     log.info('===========filter user===========')
     log.info(condition)
     db.collection('user')
+      .orderBy('照片数量', 'desc')
       .orderBy(fields[0], order)
       .orderBy(fields[1], order)
       .orderBy(fields[2], order)
@@ -742,6 +786,7 @@ function getFavorite(skip, size) {
     log.info('===========get favorite===========')
     log.info(condition)
     db.collection('user')
+      .orderBy('照片数量', 'desc')
       .where(condition)
       .skip(skip)
       .limit(size)
@@ -804,7 +849,7 @@ function getFavorite(skip, size) {
 
 function getIgnore(skip, size) {
   return new Promise((resolve, reject) => {
-    
+
     const user = wx.getStorageSync('user')
     var condition = {}
     condition['show'] = true
@@ -815,6 +860,7 @@ function getIgnore(skip, size) {
     log.info('===========get ignore===========')
     log.info(condition)
     db.collection('user')
+      .orderBy('照片数量', 'desc')
       .where(condition)
       .skip(skip)
       .limit(size)
@@ -1033,6 +1079,7 @@ function getLikeMe(skip, size) {
     log.info('===========get like me===========')
     log.info(condition)
     db.collection('user')
+      .orderBy('照片数量', 'desc')
       .where(condition)
       .skip(skip)
       .limit(size)
@@ -1099,6 +1146,7 @@ function getLikeMe(skip, size) {
 
 module.exports = {
   getOpenid: getOpenid,
+  checkUser: checkUser,
   getUser: getUser,
   getUserByOpenid: getUserByOpenid,
   updateUser: updateUser,

@@ -1,4 +1,5 @@
 const util = require('../utils/util.js')
+var log = require('../utils/log.js')
 const db = wx.cloud.database() // 初始化数据库
 const _ = db.command
 

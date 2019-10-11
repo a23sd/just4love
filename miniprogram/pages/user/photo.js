@@ -33,6 +33,7 @@ Page({
       "是否打牌": "请选择",
       "照片": [],
       "缩略图": [],
+      "照片数量": 0,
       "爱情宣言": "",
       "心仪": [],
       "屏蔽": [],
@@ -73,7 +74,7 @@ Page({
               encoding: 'base64', //编码格式
               success: res => { //成功的回调
                 wx.cloud.callFunction({
-                  name: 'tinypng',
+                  name: 'uploadImage',
                   data: {
                     fileName: fileName,
                     file: res.data
@@ -104,7 +105,8 @@ Page({
         Promise.all(promiseArr).then(res => {
           that.setData({
             ["values.照片"]: that.data.images,
-            ["values.缩略图"]: that.data.thumbs
+            ["values.缩略图"]: that.data.thumbs,
+            ["values.照片数量"]: that.data.images.length
           })
           this.updateUser()
         }).catch(err => {
