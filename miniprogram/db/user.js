@@ -1024,10 +1024,16 @@ function getLikeMe(skip, size) {
   const openid = wx.getStorageSync('openid')
   const user = wx.getStorageSync('user')
   return new Promise((resolve, reject) => {
+    var condition = {}
+    condition['show'] = true
+    condition['enable'] = true
+    condition['心仪'] = openid
+    console.log('===========get like me===========')
+    console.log(condition)
+    log.info('===========get like me===========')
+    log.info(condition)
     db.collection('user')
-      .where({
-        心仪: openid
-      })
+      .where(condition)
       .skip(skip)
       .limit(size)
       .field({
