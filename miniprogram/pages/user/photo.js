@@ -2,6 +2,7 @@
 import Toast from '/vant-weapp/toast/toast'
 const regeneratorRuntime = require('../../lib/regenerator-runtime/runtime')
 const user = require('../../db/user.js')
+const image = require('../../db/image.js')
 const util = require('../../utils/util.js')
 Page({
   /**
@@ -84,18 +85,78 @@ Page({
                       images: that.data.images.concat(response.result.fileID),
                       thumbs: that.data.thumbs.concat(response.result.thumbFileID)
                     })
+                    wx.cloud.callFunction({
+                      // 要调用的云函数名称
+                      name: 'compressImage',
+                      // 传递给云函数的参数
+                      data: {
+                        fileName: fileName
+                      }
+                    }).catch(err => {
+                      console.log(err)
+                      wx.cloud.callFunction({
+                        // 要调用的云函数名称
+                        name: 'compressImage',
+                        // 传递给云函数的参数
+                        data: {
+                          fileName: fileName
+                        }
+                      }).catch(err => {
+                        console.log(err)
+                        wx.cloud.callFunction({
+                          // 要调用的云函数名称
+                          name: 'compressImage',
+                          // 传递给云函数的参数
+                          data: {
+                            fileName: fileName
+                          }
+                        }).catch(err => {
+                          console.log(err)
+                          image.addImage("images/" + fileName)
+                        })
+                      })
+                    })
+                    wx.cloud.callFunction({
+                      // 要调用的云函数名称
+                      name: 'resizeImage',
+                      // 传递给云函数的参数
+                      data: {
+                        fileName: fileName
+                      }
+                    }).catch(err => {
+                      console.log(err)
+                      wx.cloud.callFunction({
+                        // 要调用的云函数名称
+                        name: 'resizeImage',
+                        // 传递给云函数的参数
+                        data: {
+                          fileName: fileName
+                        }
+                      }).catch(err => {
+                        console.log(err)
+                        wx.cloud.callFunction({
+                          // 要调用的云函数名称
+                          name: 'resizeImage',
+                          // 传递给云函数的参数
+                          data: {
+                            fileName: fileName
+                          }
+                        }).catch(err => {
+                          console.log(err)
+                          image.addImage("thumbs/" + fileName)
+                        })
+                      })
+                    })
                     console.log(response)
                     reslove()
                   },
                   fail(error) {
-                    Toast.fail('上传照片失败')
                     console.log(error)
                     reject(error)
                   }
                 })
               },
               fail(err) {
-                Toast.fail('上传照片失败')
                 console.log(err)
                 reject(error)
               }
@@ -103,13 +164,20 @@ Page({
           }))
         }
         Promise.all(promiseArr).then(res => {
+          wx.showLoading({
+            title: '上传中...',
+            mask: true
+          })
           that.setData({
             ["values.照片"]: that.data.images,
             ["values.缩略图"]: that.data.thumbs,
             ["values.照片数量"]: that.data.images.length
           })
+          wx.hideLoading()
           this.updateUser()
         }).catch(err => {
+          wx.hideLoading()
+          Toast.fail('上传照片失败')
           console.log(err)
         })
       }
