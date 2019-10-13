@@ -341,34 +341,35 @@ function getRecommend(skip, size, fields, order) {
       } else if (key === '年龄') {
         var age = requireInfo[key]
         if (age.indexOf("年及以上") > -1) {
-          age = age.substring(0, age.indexOf("年及以上") - 1)
-          var fromDate = new Date(parseInt(age), 0, 1)
+          age = age.substring(0, age.indexOf("年及以上"))
+          console.log(age)
+          var fromDate = new Date(age, 0, 1)
           condition['生日'] = _.gte(fromDate)
         } else if (age.indexOf("年及以下") > -1) {
-          age = age.substring(0, age.indexOf("年及以下") - 1)
-          var toDate = new Date(parseInt(age), 11, 31)
+          age = age.substring(0, age.indexOf("年及以下"))
+          var toDate = new Date(age, 11, 31)
           condition['生日'] = _.lte(toDate)
         } else if (age.indexOf("-") > -1) {
           var ageArr = age.split('-')
           var ageFrom = ageArr[0].substring(0, ageArr[0].indexOf("年"))
           var ageTo = ageArr[1].substring(0, ageArr[1].indexOf("年"))
-          var fromDate = new Date(parseInt(ageFrom), 0, 1)
-          var toDate = new Date(parseInt(ageTo), 11, 31)
+          var fromDate = new Date(ageFrom, 0, 1)
+          var toDate = new Date(ageTo, 11, 31)
           condition['生日'] = _.gte(fromDate).and(_.lte(toDate))
         } else {
           age = age.substring(0, age.indexOf("年"))
-          var fromDate = new Date(parseInt(age), 0, 1)
-          var toDate = new Date(parseInt(age), 11, 31)
+          var fromDate = new Date(age, 0, 1)
+          var toDate = new Date(age, 11, 31)
           condition['生日'] = _.gte(fromDate).and(_.lte(toDate))
         }
       } else if (key == '身高') {
         var height = requireInfo[key]
         if (height.indexOf("cm及以上") > -1) {
           height = height.substring(0, height.indexOf("cm及以上"))
-          condition[key] = _.gte(parseInt(height) + 1).and(_.lte(parseInt(250)))
+          condition[key] = _.gte(parseInt(height)).and(_.lte(250))
         } else if (height.indexOf("cm及以下") > -1) {
           height = height.substring(0, height.indexOf("cm及以下"))
-          condition[key] = _.gte(parseInt(0)).and(_.lte(parseInt(height) - 1))
+          condition[key] = _.gte(0).and(_.lte(parseInt(height)))
         } else if (height.indexOf("-") > -1) {
           var heightArr = height.split('-')
           var heightFrom = heightArr[0].substring(0, heightArr[0].indexOf("cm"))
@@ -382,10 +383,10 @@ function getRecommend(skip, size, fields, order) {
         var weight = requireInfo[key]
         if (weight.indexOf("kg及以上") > -1) {
           weight = weight.substring(0, weight.indexOf("kg及以上"))
-          condition[key] = _.gte(parseInt(weight) + 1).and(_.lte(parseInt(150)))
+          condition[key] = _.gte(parseInt(weight)).and(_.lte(150))
         } else if (weight.indexOf("kg及以下") > -1) {
           weight = weight.substring(0, weight.indexOf("kg及以下"))
-          condition[key] = _.gte(parseInt(0)).and(_.lte(parseInt(weight) - 1))
+          condition[key] = _.gte(0).and(_.lte(parseInt(weight)))
         } else if (weight.indexOf("-") > -1) {
           var weightArr = weight.split('-')
           var weightFrom = weightArr[0].substring(0, weightArr[0].indexOf("kg"))
@@ -661,6 +662,13 @@ function filterUser(selectItem, skip, size, fields, order) {
           condition['生日'] = _.gte(fromDate).and(_.lte(toDate))
         }
       } else if (obj.text == '身高') {
+        if (obj.values.length === 1) {
+          condition[obj.text] = obj.values[0]
+        } else {
+          obj.values.sort()
+          condition[obj.text] = _.gte(obj.values[0]).and(_.lte(obj.values[1]))
+        }
+      } else if (obj.text == '体重') {
         if (obj.values.length === 1) {
           condition[obj.text] = obj.values[0]
         } else {
