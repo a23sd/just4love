@@ -5,12 +5,14 @@ view {
   font-size: 14px;
 }
 
-text {
-  color: #a4579d;
-}
-
 image {
   width: 200rpx;
   height: 200rpx;
   margin: 10rpx;
+}
+.wechat {
+ font-size: 14px;
+ margin: 20px;
+ text-align: right;
+ color: red;
 }

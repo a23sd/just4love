@@ -121,7 +121,7 @@ Page({
       await record.getRecord(true)
       this.setData({
         disabled: false,
-        status: `微信号：${this.data.wechat}`
+        status: `点击复制微信号：${this.data.wechat}`
       })
     } catch (err) {
       console.log(err)
@@ -134,7 +134,7 @@ Page({
   onClick: function () {
     if (this.data.values.查看的用户.indexOf(this.data.openid) > -1) {
       this.setData({
-        status: `微信号：${this.data.wechat}`
+        status: `点击复制微信号：${this.data.wechat}`
       })
     } 
     else {
@@ -148,6 +148,21 @@ Page({
       })
       this.updateRecord()
     }
+  },
+
+  onClipboard: function () {
+    wx.setClipboardData({
+      data: this.data.wechat,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            wx.showToast({
+              title: '复制成功'
+            })
+          }
+        })
+      }
+    })
   },
 
   /**

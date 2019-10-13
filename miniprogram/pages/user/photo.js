@@ -164,7 +164,8 @@ Page({
         images: this.data.images,
         thumbs: this.data.thumbs,
         ["values.照片"]: this.data.images,
-        ["values.缩略图"]: this.data.thumbs
+        ["values.缩略图"]: this.data.thumbs,
+        ["values.照片数量"]: this.data.images.length
       })
       this.updateUser()
     }).catch(err => {

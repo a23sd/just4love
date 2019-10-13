@@ -17,7 +17,8 @@
 </van-panel>
 
 <van-button color="#a4579d" size="small" disabled="{{disabled}}" block="true" bindtap="onClick">查看微信</van-button>
-<van-panel title="个人资料" status="{{status}}">
+<view class="wechat" bindtap="onClipboard">{{status}}</view>
+<van-panel title="个人资料">
   <view>
     <van-tag plain size="medium" color="#a4579d" wx:for="{{infoTitle}}" wx:key="{{index}}" wx:if="{{info[item] !== '请选择'&& info[item] !== undefinded}}">{{info[item]}}</van-tag>
   </view>

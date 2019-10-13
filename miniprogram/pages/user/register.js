@@ -441,7 +441,7 @@ Page({
           that.setData({
             ["userValues.照片"]: that.data.images,
             ["userValues.缩略图"]: that.data.thumbs,
-            ["values.照片数量"]: that.data.images.length
+            ["userValues.照片数量"]: that.data.images.length
           })
           this.updateUser()
         }).catch(err => {
@@ -499,7 +499,8 @@ Page({
         images: this.data.images,
         thumbs: this.data.thumbs,
         ["userValues.照片"]: this.data.images,
-        ["userValues.缩略图"]: this.data.thumbs
+        ["userValues.缩略图"]: this.data.thumbs,
+        ["userValues.照片数量"]: this.data.images.length
       })
       this.updateUser()
     }).catch(err => {
