@@ -5,7 +5,9 @@ const tinify = require("tinify")
 cloud.init()
 
 const API_KEY_LIST = [
-  '6zSQLjG9S0hprNWxH4QHCwQ2b4tHqq1H', 'shwkMtGDH15bpfKl096Pf1YnJppJmSyn', 'zTNkftk044mG1h7qs8ZF86vLWRfDC5x5', 'Dkg5bmNDXBTDCfBvTc5hcwtRZDH5NGlW'
+  '6zSQLjG9S0hprNWxH4QHCwQ2b4tHqq1H', 'shwkMtGDH15bpfKl096Pf1YnJppJmSyn',
+  'zTNkftk044mG1h7qs8ZF86vLWRfDC5x5', 'Dkg5bmNDXBTDCfBvTc5hcwtRZDH5NGlW',
+  'DBq6nXVbJ7HwjjHhgkwmnVtb2S3HTflt'
 ]
 
 tinify.key = API_KEY_LIST[Math.floor(Math.random() * API_KEY_LIST.length)]
@@ -24,7 +26,7 @@ exports.main = async(event, context) => {
 
   // optimized
   const fileID = await new Promise((reslove, reject) => {
-    source.toBuffer(function (err, resultData) {
+    source.toBuffer(function(err, resultData) {
       if (err) throw err;
       cloud.uploadFile({
         cloudPath: "images/" + fileName,
@@ -38,7 +40,7 @@ exports.main = async(event, context) => {
       })
     })
   })
-  
+
   return {
     fileID: fileID
   }

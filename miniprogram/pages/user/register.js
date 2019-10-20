@@ -76,9 +76,9 @@ Page({
     active: 0,
     code: '',
     steps: [
-      // {
-      //   text: '激活码'
-      // },
+      {
+        text: '激活码'
+      },
       {
         text: '基本信息'
       },
