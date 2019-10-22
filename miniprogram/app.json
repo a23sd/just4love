@@ -40,7 +40,9 @@
     "pages/admin/users",
     "pages/admin/invitationcode",
     "pages/admin/notice",
-    "pages/admin/sponsor"
+    "pages/admin/sponsor",
+    "pages/apply/vip",
+    "pages/admin/vip"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

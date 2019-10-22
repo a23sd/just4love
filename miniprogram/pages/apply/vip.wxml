@@ -1,0 +1,21 @@
+<!--pages/apply/vip.wxml-->
+<van-toast id="van-toast"/>
+<van-row wx:if="{{!id}}">
+  <van-field
+    value="{{ notes }}"
+    label="备注"
+    type="textarea"
+    placeholder="请输入备注"
+    autosize="true"
+    bind:change="onChange" id="van-toast"/>
+  <van-button color="#a4579d" block="true" bindtap="onSubmit">提交</van-button>
+</van-row>
+<van-row wx:else>
+  <van-cell-group title="申请状态">
+    <van-cell  value="{{ status }}"/>
+  </van-cell-group>
+  <van-cell-group title="申请备注">
+    <van-cell value="{{notes}}"/>
+  </van-cell-group>
+  <van-button wx:if="{{ status=='不通过'|| status=='通过'}}" color="#a4579d" block="true" bindtap="againApply">重新申请</van-button>
+</van-row>

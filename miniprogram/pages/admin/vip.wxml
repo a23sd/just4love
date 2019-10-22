@@ -1,0 +1,15 @@
+<!--pages/recommend/recommend.wxml-->
+<van-toast id="van-toast" />
+    <view wx:for="{{recommends}}" wx:for-item="recommend" wx:key="{{index}}">
+    <van-row>
+      <van-col span="24">
+      <van-panel title="{{recommend['true_name']}}" desc="{{recommend['create_date']}}" status="{{recommend['status']}}" use-footer-slot>
+        <view>申请备注：{{recommend['notes']}}</view>
+        <view slot="footer">
+          <van-button size="small" bindtap="pass" data-openid="{{recommend['_openid']}}">通过</van-button>
+          <van-button size="small" type="danger" bindtap="unpass" data-openid="{{recommend['_openid']}}" style="float:right">不通过</van-button>
+        </view>
+      </van-panel>
+      </van-col>
+    </van-row>
+    </view>

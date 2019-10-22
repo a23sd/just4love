@@ -2,7 +2,7 @@
 <van-toast id="van-toast" />
 <van-card>
   <view slot="title">
-    <open-data type="userNickName" lang="zh_CN"></open-data>
+    <open-data type="userNickName" lang="zh_CN"></open-data><van-tag wx:if="{{values['vip']}}" round type="success">VIP</van-tag>
   </view>
   <view slot="thumb">
     <open-data type="userAvatarUrl"></open-data>
@@ -45,6 +45,7 @@
   <van-cell icon="warning-o" is-link title="举报" link-type="navigateTo" url="/pages/report/report" />
   <van-cell icon="records" is-link title="建议" link-type="navigateTo" url="/pages/suggest/suggest" />
   <van-cell icon="records" is-link title="赞助" link-type="navigateTo" url="/pages/sponsor/sponsor" />
+  <van-cell wx:if="{{!values['vip']}}" icon="records" is-link title="{{vip_apply_title}}" link-type="navigateTo" url="/pages/apply/vip" />
 </van-cell-group>
 
 <van-cell-group wx:if="{{values['admin']}}" title="admin">

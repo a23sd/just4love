@@ -44,7 +44,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 19,
+			"current": 21,
 			"list": [
 				{
 					"id": -1,
@@ -182,6 +182,20 @@
 					"id": -1,
 					"name": "pages/user/likeme",
 					"pathName": "pages/user/likeme",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/apply/vip",
+					"pathName": "pages/apply/vip",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/admin/vip",
+					"pathName": "pages/admin/vip",
 					"scene": null
 				}
 			]

@@ -4,4 +4,5 @@
   <van-cell icon="notes-o" is-link title="邀请码生成" link-type="navigateTo" data-info="option" url="/pages/admin/invitationcode" />
   <van-cell icon="notes-o" is-link title="发布公告" link-type="navigateTo" data-info="option" url="/pages/admin/notice" />
   <van-cell icon="notes-o" is-link title="增加赞助商" link-type="navigateTo" data-info="option" url="/pages/admin/sponsor" />
+  <van-cell icon="notes-o" is-link title="VIP管理" link-type="navigateTo" data-info="option" url="/pages/admin/vip" />
 </van-cell-group>
