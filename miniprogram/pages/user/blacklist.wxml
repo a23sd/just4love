@@ -1,0 +1,26 @@
+<!--pages/user/blacklist.wxml-->
+<van-toast id="van-toast" />
+
+<van-card wx:for="{{users}}" wx:for-item="user" wx:key="{{index}}" thumb="{{ user['缩略图'] }}" thumb-link="../user/info?openid={{user._openid}}">
+  <view slot="title">
+    <van-row>
+      <van-col span="12">{{user['姓名']}}
+        <van-icon name="{{sexIcon[user['性别']]}}" size="medium" color="#a4579d" /></van-col>
+      <van-col offset="4" span="6">
+      </van-col>
+    </van-row>
+  </view>
+
+  <view slot="tags" class="tags">
+    <view>
+      <van-tag plain color="#a4579d">{{user['学历']}}</van-tag>
+      <van-tag plain color="#a4579d">{{user['职业']}}</van-tag>
+      <van-tag plain color="#a4579d">{{user['生日']}}</van-tag>
+    </view>
+    <view>
+      <van-tag plain color="#a4579d">{{user['身高']}}</van-tag>
+      <van-tag plain color="#a4579d">{{user['体重']}}</van-tag>
+      <van-tag plain color="#a4579d">{{user['工作地']}}</van-tag>
+    </view>
+  </view>
+</van-card>

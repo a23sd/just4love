@@ -1,0 +1,4 @@
+/* pages/user/blacklist.wxss */
+.tags view  {
+  margin: 2px;
+} 

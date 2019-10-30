@@ -41,7 +41,7 @@
 </van-cell-group>
 
 <van-cell-group title="其他">
-  <!-- <van-cell icon="notes-o" is-link title="用户手册" link-type="navigateTo" url="/pages/user/handbook" /> -->
+  <van-cell icon="notes-o" is-link title="黑名单" link-type="navigateTo" url="/pages/user/blacklist" />
   <van-cell icon="warning-o" is-link title="举报" link-type="navigateTo" url="/pages/report/report" />
   <van-cell icon="records" is-link title="建议" link-type="navigateTo" url="/pages/suggest/suggest" />
   <van-cell icon="records" is-link title="赞助" link-type="navigateTo" url="/pages/sponsor/sponsor" />

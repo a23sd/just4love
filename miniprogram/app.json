@@ -31,7 +31,7 @@
     "pages/user/favorite",
     "pages/user/ignore",
     "pages/user/likeme",
-    "pages/user/handbook",
+    "pages/user/blacklist",
     "pages/user/register",
     "pages/report/report",
     "pages/suggest/suggest",

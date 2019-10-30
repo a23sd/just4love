@@ -950,7 +950,7 @@ function getUsers(skip, size) {
         缩略图: true,
         心仪: true,
         "enable": true,
-        "vip": true,
+        "vip": true
       })
       .get().then(res => {
         res.data.map(function(obj) {
@@ -1041,7 +1041,9 @@ function searchUserByAdmin(keyword, skip, size) {
         工作地: true,
         照片: true,
         缩略图: true,
-        心仪: true
+        心仪: true,
+        "enable": true,
+        "vip": true
       }).get().then(res => {
         res.data.map(function(obj) {
           if (obj.照片.length == 0 || obj.缩略图.length == 0) {
@@ -1152,6 +1154,60 @@ function getLikeMe(skip, size) {
   })
 }
 
+function getBlackList(skip, size) {
+  return new Promise((resolve, reject) => {
+    var condition = {}
+    condition['enable'] = false
+    db.collection('user')
+      .where(condition)
+      .skip(skip)
+      .limit(size)
+      .field({
+        _openid: true,
+        姓名: true,
+        性别: true,
+        生日: true,
+        学历: true,
+        身高: true,
+        体重: true,
+        职业: true,
+        工作地: true,
+        照片: true,
+        缩略图: true,
+        心仪: true,
+        "enable": true,
+        "vip": true
+      })
+      .get().then(res => {
+        res.data.map(function (obj) {
+          if (obj.照片.length == 0 || obj.缩略图.length == 0) {
+            obj.照片 = "/images/notfound.jpg"
+            obj.缩略图 = "/images/notfound.jpg"
+          } else {
+            obj.照片 = obj.照片[0]
+            obj.缩略图 = obj.缩略图[0]
+          }
+          obj.生日 = new Date(obj.生日)
+          obj.生日 = [obj.生日.getFullYear(), obj.生日.getMonth() + 1, obj.生日.getDate()].join('-')
+          obj.身高 = obj.身高 + 'cm'
+          obj.体重 = obj.体重 + 'kg'
+          return obj;
+        })
+        console.log("===============get blacklist success==============")
+        console.log(res.data)
+        log.info("===============get blacklist success==============")
+        log.info(res.data)
+        resolve(res.data)
+      }).catch(err => {
+        console.log("===============get blacklist failed==============")
+        console.error(err)
+        log.info("===============get blacklist failed==============")
+        log.error(err)
+        reject(err)
+      })
+  })
+}
+
 module.exports = {
   getOpenid: getOpenid,
   checkUser: checkUser,
@@ -1167,5 +1223,6 @@ module.exports = {
   getIgnore: getIgnore,
   getUsers: getUsers,
   searchUserByAdmin: searchUserByAdmin,
-  getLikeMe: getLikeMe
+  getLikeMe: getLikeMe,
+  getBlackList: getBlackList
 }
