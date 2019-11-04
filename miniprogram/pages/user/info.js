@@ -12,6 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    admin: false,
     disabled: false,
     recordid: '',
     openid: '',
@@ -40,6 +41,18 @@ Page({
       fail: function(res) {},
       complete: function(res) {},
     })
+  },
+
+  async getUser() {
+    try {
+      await user.getOpenid()
+      var userInfo = await user.getUser(true)
+      this.setData({
+        admin: userInfo.admin
+      })
+    } catch (err) {
+      console.log(err)
+    }
   },
 
   async getUserInfo(openid) {
@@ -138,8 +151,8 @@ Page({
       })
     } 
     else {
-      if (this.data.values.查看的用户.length >= 5) {
-        Toast('每天最多查看5个微信号')
+      if (this.data.admin == false && this.data.values.查看的用户.length > 3) {
+        Toast('每天最多查看3个微信号')
         return
       }
       this.setData({
@@ -172,6 +185,9 @@ Page({
     this.setData({
       openid: options.openid
     })
+    this.getUserInfo(this.data.openid)
+    this.getRecord(true)
+    this.getUser()
   },
 
   /**
@@ -185,8 +201,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.getUserInfo(this.data.openid)
-    this.getRecord(true)
+
   },
 
   /**
