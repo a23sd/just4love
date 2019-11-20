@@ -10,7 +10,7 @@
   </view>
 </van-panel>
 
-<van-panel title="爱情宣言" wx:if="{{declaration !== ''}}">
+<van-panel title="补充信息" wx:if="{{declaration !== ''}}">
   <text>
     {{declaration}}
   </text>

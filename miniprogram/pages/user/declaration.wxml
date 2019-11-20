@@ -2,7 +2,7 @@
 <van-toast id="van-toast" />
 <van-field
     value="{{ values['爱情宣言'] }}"
-    label="爱情宣言"
+    label="补充信息"
     type="textarea"
     placeholder="请输入爱情宣言"
     autosize="true"

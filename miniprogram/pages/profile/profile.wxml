@@ -25,7 +25,7 @@
 <van-cell-group title="个人信息">
   <van-cell icon="notes-o" is-link title="基本信息" link-type="navigateTo" url="/pages/user/edit" />
   <van-cell icon="photo-o" is-link title="我的相册" link-type="navigateTo" url="/pages/user/photo" />
-  <van-cell icon="like-o" is-link title="爱情宣言" link-type="navigateTo" url="/pages/user/declaration" />
+  <van-cell icon="like-o" is-link title="补充信息" link-type="navigateTo" url="/pages/user/declaration" />
   <van-switch-cell icon="eye-o" title="公开信息" checked="{{ values['show'] }}" bind:change="onChange" />
 </van-cell-group>
 
