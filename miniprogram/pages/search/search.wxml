@@ -6,7 +6,7 @@
 </van-popup>
 
 
-<van-field left-icon="search" right-icon="apps-o" placeholder="请输入搜索关键词" clearable focus value="{{keyword}}" bind:confirm="onSearch" bind:click-icon="onClick" color="#a4579d" />
+<van-field left-icon="search" right-icon="apps-o" placeholder="请输入搜索关键词" clearable value="{{keyword}}" bind:confirm="onSearch" bind:click-icon="onClick" color="#a4579d" />
 
 <view class="prompt">{{prompt}}</view>
 

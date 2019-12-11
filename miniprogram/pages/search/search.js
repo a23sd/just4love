@@ -79,7 +79,7 @@ Page({
     pageSize: 10,
     fields: util.getRandomArrayElements(fieldList, 3),
     order: orderList[Math.floor(Math.random() * orderList.length)],
-    type: 'search',
+    type: '',
     results: [],
     show: false,
     keyword: '',
@@ -333,7 +333,7 @@ Page({
   async filterUser() {
     try {
       wx.showLoading({
-        title: '过滤中...',
+        title: '加载中...',
         mask: true
       })
       await user.getOpenid()
@@ -350,11 +350,11 @@ Page({
         results: this.data.results.concat(results)
       })
       wx.hideLoading()
-      Toast.success('过滤成功')
+      Toast.success('加载成功')
     } catch (err) {
       console.log(err)
       wx.hideLoading()
-      Toast.fail('过滤失败')
+      Toast.fail('加载失败')
     }
   },
 
@@ -508,7 +508,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.setData({
+      results: [],
+      type: '',
+      keyword: ''
+    });
+    this.getResult();
   },
 
   /**
@@ -530,7 +535,9 @@ Page({
    */
   onPullDownRefresh: function() {
     this.setData({
-      results: []
+      results: [],
+      type: '',
+      keyword: ''
     });
     this.getResult();
   },
